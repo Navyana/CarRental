@@ -2,14 +2,7 @@ const express = require('express')
 const indexController = require('../controller/indexController')
  let nodeGeocoder = require('node-geocoder');
 const router = express.Router()
-const Driver = require('../models/Driver')
-
-// let options = {
-//     provider: 'openstreetmap'
-// };
-
-// let geoCoder = nodeGeocoder(options);
-
+const Driver = require('../models/Driver');
 
 
 router.get('/', async(req,res)=>{
