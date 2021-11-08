@@ -13,10 +13,10 @@
     "express": "^4.17.1",
     "express-ejs-layouts": "^2.5.1",
     "mongoose": "^6.0.12",
+    "nodemon": "^2.0.14",
     "node-geocoder": "^3.27.0",
     "react-geocode": "^0.2.3"
   },
-  "devDependencies": {},
   "keywords": [],
   "author": "",
   "license": "ISC"
