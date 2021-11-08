@@ -1,0 +1,79 @@
+
+// router.get('/search', async(req,res)=>{
+//     res.render('search')
+// })
+
+// router.post('/search', async(req,res)=>{
+    
+//     // const c = new car({
+//     //     driver:{ 
+//     //         name: req.body.name,
+//     //         contact: req.body.contact
+//     //     },
+//     //     number_plate: req.body.number_plate
+//     // })
+//     try{
+//         const driver = new Driver({
+//             name: req.body.name,
+//             contact: req.body.contact,
+//             number_plate: req.body.number_plate,
+//             location:{
+//                 latitude: req.body.latitude,
+//                 longitude:req.body.longitude,
+//             }
+//         })
+//         const newdriver = await driver.save()
+//         res.status(201)
+//     }catch(err){
+//         res.status(400).json({message: err.message})
+//         res.redirect('index')
+//     }
+    
+// })
+
+
+
+const driverOne = new Driver({
+    name: 'raj',
+    location:{
+        type:'Point',
+        coordinates: [-80.25, 25.79]
+    }
+});
+const driverTwo = new Driver({
+    name: 'arun',
+    location:{
+        type:'Point',
+        coordinates: [-122.476, 47.61]
+    }
+});
+Promise.all([
+    driverOne.save(),
+    driverTwo.save()
+])
+
+
+let searchOptions = {}
+    if(req.query.lon != null && req.query.lon !== ''){
+        searchOptions.lon = new RegExp(req.query.lon, 'i')
+    }if(req.query.lat != null && req.query.lat !== ''){
+        searchOptions.lat = new RegExp(req.query.lat, 'i')
+    }
+    try{
+        const drivers = await Driver.find({
+            location: {
+                $nearSphere:{
+                    $geometry:{
+                        type: 'Point',
+                        coordinates : [parseFloat(lon), parseFloat(lat)]
+                    },
+                    $maxDistance: 200000
+                }
+            }
+        })
+        .then(drivers => console.log(drivers))
+    }catch{
+        res.status(404)
+    }
+    
+});
