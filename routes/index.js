@@ -44,7 +44,9 @@ router.get('/search',async(req, response)=>{
                     }
                 }
             })
-            .then(drivers => response.send(drivers))
+            .then(drivers => response.render('search', {drivers:drivers}))
+            
+            
         }catch{
             res.status(404)
         }

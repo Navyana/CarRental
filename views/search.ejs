@@ -1,0 +1,11 @@
+<div class="form-container">
+
+    <h3>Near Services </h3>
+    <% for(var i=0; i<drivers.length; i++) {%>
+        <div class="form-grp2">
+        Driver name :<%= drivers[i].name%><br>
+        location:[<%= drivers[i].location.coordinates%>]
+        </div>
+    <% }%>
+
+</div>
